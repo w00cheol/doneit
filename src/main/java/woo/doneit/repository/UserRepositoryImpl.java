@@ -1,6 +1,6 @@
 package woo.doneit.repository;
 
-import jakarta.persistence.EntityManager;
+import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import woo.doneit.domain.User;

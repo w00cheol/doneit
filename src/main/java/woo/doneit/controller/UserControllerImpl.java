@@ -1,7 +1,7 @@
 package woo.doneit.controller;
 
 import io.swagger.annotations.Api;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import woo.doneit.domain.SignUpRequestUserDto;
 import woo.doneit.service.UserService;
 
 @RestController
-@Api(tags = "test")
+@Api(tags = "Hello")
 @RequiredArgsConstructor
 public class UserControllerImpl implements UserController {
 

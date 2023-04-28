@@ -13,18 +13,19 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 @EnableWebMvc
 public class SwaggerConfig {
+
     @Bean
     public Docket restApi() {
         return new Docket(DocumentationType.OAS_30) // 버전 3
                 .useDefaultResponseMessages(true)
-                .apiInfo(apiinfo())
+                .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("woo.doneit"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
-    private ApiInfo apiinfo() {
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("DoneIt Spring Boot REST API")
                 .version("1.0.0")
