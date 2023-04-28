@@ -21,10 +21,10 @@ public class UserTest {
 
     private User getUser() {
         return User.builder()
-                        .loginId("woo")
-                        .name("권우철")
-                        .password("1234")
-                        .build();
+                .name("권우철")
+                .signInId("woo")
+                .password("1234")
+                .build();
     }
 
     @Test()
@@ -40,7 +40,7 @@ public class UserTest {
         em.clear();
 
         //then
-        assertThat(user.getLoginId()).isEqualTo(em.find(User.class, saveId).getLoginId());
+        assertThat(user.getSignInId()).isEqualTo(em.find(User.class, saveId).getSignInId());
         assertThat(user.getName()).isEqualTo(em.find(User.class, saveId).getName());
         assertThat(user.getPassword()).isEqualTo(em.find(User.class, saveId).getPassword());
         assertThat(user.getCreateDateTime()).isEqualTo(em.find(User.class, saveId).getCreateDateTime());

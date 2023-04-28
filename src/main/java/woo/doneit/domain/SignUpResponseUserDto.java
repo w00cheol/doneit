@@ -1,6 +1,7 @@
 package woo.doneit.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,9 +9,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SignUpResponseUserDto {
 
-    private Long id;
+    private String signInId;
+    private String name;
 
-    public SignUpResponseUserDto(User user) {
-        this.id = user.getId();
+    @Builder
+    public SignUpResponseUserDto(String signInId, String name) {
+        this.signInId = signInId;
+        this.name = name;
+    }
+
+    public static SignUpResponseUserDto fromEntity(User user) {
+        return SignUpResponseUserDto
+                .builder()
+                .name(user.getName())
+                .signInId(user.getSignInId())
+                .build();
     }
 }

@@ -22,7 +22,7 @@ public class User {
     private String name;
 
     @Column(length = 10, nullable = false, unique = true)
-    private String loginId;
+    private String signInId;
 
     @Column(nullable = false)
     private String password;
@@ -37,13 +37,13 @@ public class User {
     }
 
     @Builder
-    public User(String name, String loginId, String password) {
+    public User(String name, String signInId, String password) {
         Assert.hasText(name, "name must not be null");
-        Assert.hasText(loginId, "loginId must not be null");
+        Assert.hasText(signInId, "signInId must not be null");
         Assert.hasText(password, "password must not be null");
 
         this.name = name;
-        this.loginId = loginId;
+        this.signInId = signInId;
         this.password = password;
     }
 }
