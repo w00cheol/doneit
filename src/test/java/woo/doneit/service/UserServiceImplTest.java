@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import woo.doneit.domain.SignUpRequestUserDto;
 import woo.doneit.domain.SignUpResponseUserDto;
 import woo.doneit.domain.User;
+import woo.doneit.exception.UserNotFoundException;
 import woo.doneit.repository.UserRepository;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -95,5 +96,41 @@ public class UserServiceImplTest {
         assertThrows(IllegalArgumentException.class, () -> {
             userService.signUp(reqDtoInvalidPassword);
         });
+    }
+
+    @Test
+    public void 로그인() {
+        //given
+        SignUpRequestUserDto reqDto = getSignUpRequestUserDto("권우철", "woo", "1234");
+        userService.signUp(reqDto);
+        User user = userRepository.findOneBySignInId("woo").get();
+
+        //when
+        Long responseIdByName = userService.signIn(user.getName(), "1234");
+        Long responseIdBySignInId = userService.signIn(user.getSignInId(), "1234");
+
+        //then
+        Assertions.assertThat(responseIdByName).isEqualTo(user.getId());
+        Assertions.assertThat(responseIdBySignInId).isEqualTo(user.getId());
+    }
+
+    @Test
+    public void 로그인_예외() {
+        //given
+        SignUpRequestUserDto reqDto = getSignUpRequestUserDto("권우철", "woo", "1234");
+        userService.signUp(reqDto);
+
+        //then
+        assertThrows(UserNotFoundException.class,
+                () -> userService.signIn("otherName", "1234"),
+                "UserNotFoundException must occur because no users match this name or signId");
+
+        assertThrows(UserNotFoundException.class,
+                () -> userService.signIn("권우철", "wrong"),
+                "UserNotFoundException must occur because password does not match");
+
+        assertThrows(UserNotFoundException.class,
+                () -> userService.signIn("woo", "wrong"),
+                "UserNotFoundException must occur because password does not match");
     }
 }

@@ -8,6 +8,9 @@ public interface UserService {
 
     SignUpResponseUserDto signUp(SignUpRequestUserDto signUpRequestUserDto);
 
+    // TODO: 토큰 적용
+    Long signIn(String signInIdOrName, String password);
+
     User update(Long userId);
 
     User findOneById(Long userId);
