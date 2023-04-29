@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
-
 @Slf4j
 @RestController
 @ControllerAdvice
@@ -16,7 +14,7 @@ public class CommonExceptionAdvice {
 
     @ExceptionHandler(IllegalStateException.class)
     public ResponseEntity<?> illegalStateException(Exception e) {
-        log.error(LocalDateTime.now() + e.getMessage());
+        commonException(e);
 
         return ResponseEntity
                 .badRequest()
@@ -25,10 +23,14 @@ public class CommonExceptionAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> methodArgumentNotValidException(Exception e) {
-        log.error(LocalDateTime.now() + e.getMessage());
+        commonException(e);
 
         return ResponseEntity
                 .badRequest()
                 .body(e.getMessage());
+    }
+
+    private static void commonException(Exception e) {
+        log.error(e.getMessage());
     }
 }
