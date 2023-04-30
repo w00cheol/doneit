@@ -66,15 +66,15 @@ public class UserServiceImplTest {
         //then
         assertThrows(IllegalStateException.class, () -> {
             userService.signUp(reqDtoSameName);
-        });
+        }, "name must not be duplicated");
 
         assertThrows(IllegalStateException.class, () -> {
             userService.signUp(reqDtoSameSignInId);
-        });
+        }, "signInId must not be duplicated");
 
         assertDoesNotThrow(() -> {
             userService.signUp(reqDtoSamePassword);
-        });
+        }, "password can be duplicated");
     }
 
     @Test
@@ -87,15 +87,15 @@ public class UserServiceImplTest {
         //then
         assertThrows(IllegalArgumentException.class, () -> {
             userService.signUp(reqDtoInvalidName);
-        });
+        }, "name must not be blank");
 
         assertThrows(IllegalArgumentException.class, () -> {
             userService.signUp(reqDtoInvalidSignInId);
-        });
+        }, "signInId must not be blank");
 
         assertThrows(IllegalArgumentException.class, () -> {
             userService.signUp(reqDtoInvalidPassword);
-        });
+        }, "password must not be blank");
     }
 
     @Test
