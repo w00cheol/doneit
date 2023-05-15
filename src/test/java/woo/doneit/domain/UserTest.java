@@ -28,7 +28,6 @@ public class UserTest {
     }
 
     @Test()
-    @Commit
     public void 회원가입() throws Exception {
         //given
         User user = getUser();
