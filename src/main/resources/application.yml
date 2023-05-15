@@ -1,23 +1,23 @@
 spring:
-  datasource:
-    url: ${DB_URL}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+  profiles:
+    active:
+    group:
+      LOCAL_1:
+        - common
+        - local
+        - server-port-1
 
-  jpa:
-    hibernate:
-      ddl-auto:
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
+      LOCAL_2:
+        - common
+        - local
+        - server-port-2
 
-server:
-  address: 0.0.0.0
-  port: ${SERVER_PORT_1}
+      SERVER_1:
+        - common
+        - prod
+        - server-port-1
 
-logging:
-  level:
-    org.hibernate.SQL: debug
-    org.hibernate.type: trace
+      SERVER_2:
+        - common
+        - prod
+        - server-port-2
